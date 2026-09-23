@@ -1,0 +1,657 @@
+<title>Предложение iShop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface-2: #f4f4f4;
+    --text: #101010;
+    --text-muted: #5c5c5c;
+    --border: #e6e6e6;
+    --ink: #000000;
+    --button-bg: #191919;
+    --button-text: #ffffff;
+    --accent: #ff005a;
+    --accent-ink: #ffffff;
+    --accent-soft: #ffe1eb;
+    --link-blue: #0a66ff;
+    --link-blue-soft: #e6f0ff;
+    --wa: #25d366;
+    --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 10px 28px -16px rgba(0,0,0,0.18);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --surface-2: #1c1c1c;
+      --text: #f2f2f2;
+      --text-muted: #9c9c9c;
+      --border: #2b2b2b;
+      --ink: #ffffff;
+      --button-bg: #f2f2f2;
+      --button-text: #0a0a0a;
+      --accent: #ff2d78;
+      --accent-ink: #0a0a0a;
+      --accent-soft: #3a1020;
+      --link-blue: #4f8cff;
+      --link-blue-soft: #10213d;
+      --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 14px 32px -18px rgba(0,0,0,0.7);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --surface-2: #1c1c1c;
+    --text: #f2f2f2;
+    --text-muted: #9c9c9c;
+    --border: #2b2b2b;
+    --ink: #ffffff;
+    --button-bg: #f2f2f2;
+    --button-text: #0a0a0a;
+    --accent: #ff2d78;
+    --accent-ink: #0a0a0a;
+    --accent-soft: #3a1020;
+    --link-blue: #4f8cff;
+    --link-blue-soft: #10213d;
+    --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 14px 32px -18px rgba(0,0,0,0.7);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Open Sans", "Segoe UI", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .topbar {
+    background: var(--ink);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 24px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .topbar .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .topbar .domain { margin-left: auto; opacity: 0.6; }
+
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+
+  .hero { padding: 56px 0 8px; text-align: center; }
+  .eyebrow {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 18px;
+  }
+  h1 {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 800;
+    font-size: clamp(28px, 4.6vw, 42px);
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    margin: 0 0 16px;
+    text-wrap: balance;
+  }
+  .lede { font-size: 17px; color: var(--text-muted); max-width: 64ch; margin: 0 auto; }
+
+  /* fork cards */
+  .forks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 44px 0 8px;
+  }
+  @media (max-width: 720px) { .forks { grid-template-columns: 1fr; } }
+
+  .fork {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 26px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow);
+  }
+  .fork .fork-tag {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+  .fork h2 { font-size: 21px; font-weight: 800; margin: 0 0 10px; letter-spacing: -0.01em; line-height: 1.2; }
+  .fork p.desc { font-size: 14.5px; color: var(--text-muted); margin: 0 0 18px; line-height: 1.5; flex: 1; }
+  .fork .stat-row { display: flex; gap: 14px; margin-bottom: 20px; }
+  .fork .mini-stat { flex: 1; }
+  .fork .mini-stat b {
+    display: block;
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 700;
+    font-size: 19px;
+    color: var(--text);
+  }
+  .fork .mini-stat span { font-size: 11px; color: var(--text-muted); }
+
+  .btn-link-blue {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--link-blue);
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    padding: 14px 20px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px -4px rgba(10, 102, 255, 0.5);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .btn-link-blue:hover { transform: translateY(-1px); box-shadow: 0 8px 22px -4px rgba(10, 102, 255, 0.6); }
+
+  .btn-anchor {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--button-bg);
+    color: var(--button-text);
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    padding: 14px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.12s ease;
+  }
+  .btn-anchor:hover { transform: translateY(-1px); }
+
+  /* ---- section: base reactivation (falls into on click) ---- */
+  section#base {
+    padding: 56px 0;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+    scroll-margin-top: 20px;
+  }
+  .back-to-top {
+    display: inline-block;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11.5px;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: 20px;
+  }
+  .back-to-top:hover { color: var(--text); }
+
+  .section-tag {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 8px;
+  }
+  h2.block-title { font-size: 26px; font-weight: 800; margin: 0 0 12px; letter-spacing: -0.01em; }
+  .section-sub { color: var(--text-muted); font-size: 15px; max-width: 70ch; margin: 0 0 28px; }
+
+  .flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 0 0 40px; }
+  @media (max-width: 640px) { .flow { grid-template-columns: 1fr; } }
+  .flow-step { background: var(--surface-2); border-radius: 10px; padding: 16px 16px 14px; }
+  .flow-step .n { font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 11px; color: var(--accent); margin-bottom: 6px; display: block; }
+  .flow-step h4 { font-size: 14px; font-weight: 700; margin: 0 0 4px; }
+  .flow-step p { font-size: 12px; color: var(--text-muted); margin: 0; line-height: 1.4; }
+
+  .segments { display: flex; flex-direction: column; gap: 10px; margin-bottom: 40px; }
+  .segment {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    gap: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--ink);
+    border-radius: 8px;
+    padding: 14px 18px;
+  }
+  @media (max-width: 560px) { .segment { grid-template-columns: 1fr; } }
+  .segment .who { font-weight: 700; font-size: 13.5px; }
+  .segment .cond { font-size: 11.5px; color: var(--text-muted); font-family: "JetBrains Mono", monospace; margin-top: 3px; }
+  .segment .angle { font-size: 13.5px; color: var(--text-muted); }
+
+  .angle-picker { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+  .angle-btn {
+    font-family: "Open Sans", sans-serif; font-size: 13px; font-weight: 600;
+    background: var(--surface); color: var(--text); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 9px 16px; cursor: pointer; transition: all 0.12s ease;
+  }
+  .angle-btn:hover { border-color: var(--ink); }
+  .angle-btn.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+  .sim { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 720px) { .sim { grid-template-columns: 1fr; } }
+  .sim-col { display: flex; flex-direction: column; gap: 8px; }
+  .sim-label {
+    font-family: "JetBrains Mono", monospace; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px;
+  }
+
+  .phone {
+    background: #efeae2; border: 1px solid var(--border); border-radius: 16px;
+    overflow: hidden; box-shadow: var(--shadow); min-height: 300px; display: flex; flex-direction: column;
+  }
+  .phone-head { background: var(--wa); color: #fff; padding: 12px 14px; display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 700; }
+  .phone-head .av { width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,0.25); display:flex; align-items:center; justify-content:center; font-size:12px; }
+  .phone-body { flex: 1; padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+  .wa-msg {
+    align-self: flex-start; background: #fff; border-radius: 10px; border-top-left-radius: 3px;
+    padding: 9px 12px; font-size: 13.5px; max-width: 88%; box-shadow: 0 1px 1px rgba(0,0,0,0.06);
+    opacity: 0; transform: translateY(6px); animation: rise 0.3s ease forwards;
+  }
+  @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+  .wa-cta {
+    align-self: flex-start; margin-top: 4px; background: var(--wa); color: #fff; border: none;
+    border-radius: 8px; padding: 9px 16px; font-family: "Open Sans", sans-serif; font-weight: 700;
+    font-size: 12.5px; cursor: pointer; opacity: 0; animation: rise 0.3s ease forwards; animation-delay: 0.2s;
+  }
+  .wa-cta:hover { filter: brightness(0.95); }
+
+  .chatframe {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+    overflow: hidden; box-shadow: var(--shadow); min-height: 300px; display: flex; flex-direction: column;
+  }
+  .chatframe .chat-head { background: var(--ink); color: #fff; padding: 12px 14px; display: flex; align-items: center; gap: 9px; }
+  .chatframe .chat-head .av { width: 26px; height: 26px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; }
+  .chatframe .chat-head .who { font-size: 13px; font-weight: 700; }
+  .chatframe .chat-head .status { font-size: 10px; opacity: 0.6; }
+  .chat-empty { flex: 1; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 13px; padding: 20px; text-align: center; }
+  .chatframe .chat-body { flex: 1; padding: 14px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
+  .msg { max-width: 88%; padding: 9px 12px; border-radius: 12px; font-size: 13.5px; line-height: 1.42; opacity: 0; transform: translateY(6px); animation: rise 0.28s ease forwards; }
+  .msg.bot { background: var(--surface-2); color: var(--text); align-self: flex-start; border-bottom-left-radius: 3px; }
+  .msg.user { background: var(--ink); color: #fff; align-self: flex-end; border-bottom-right-radius: 3px; }
+  .typing { align-self: flex-start; display: flex; gap: 4px; padding: 11px 13px; background: var(--surface-2); border-radius: 12px; border-bottom-left-radius: 3px; }
+  .typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--text-muted); animation: bounce 1.1s ease-in-out infinite; }
+  .typing span:nth-child(2) { animation-delay: 0.15s; }
+  .typing span:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes bounce { 0%, 60%, 100% { transform: translateY(0); opacity: 0.5; } 30% { transform: translateY(-4px); opacity: 1; } }
+  .quick-replies { display: flex; flex-wrap: wrap; gap: 6px; }
+  .qr-btn { font-family: "Open Sans", sans-serif; font-size: 12.5px; font-weight: 600; background: var(--surface); color: var(--text); border: 1.5px solid var(--ink); border-radius: 100px; padding: 7px 13px; cursor: pointer; }
+  .qr-btn:hover { background: var(--ink); color: #fff; }
+  .qr-btn:disabled { opacity: 0.35; pointer-events: none; }
+  .rec-card { background: var(--surface); border: 1.5px solid var(--ink); border-radius: 10px; padding: 12px 13px; align-self: flex-start; max-width: 96%; opacity: 0; transform: translateY(6px); animation: rise 0.3s ease forwards; }
+  .rec-card .rec-title { font-size: 13.5px; font-weight: 700; margin-bottom: 2px; }
+  .rec-card .rec-why { font-size: 12px; color: var(--text-muted); margin-bottom: 10px; line-height: 1.4; }
+  .rec-card .rec-price { font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 15px; margin-bottom: 10px; }
+  .rec-card .rec-price .old { font-weight: 400; font-size: 12px; color: var(--text-muted); text-decoration: line-through; margin-left: 6px; }
+  .add-cart-btn { width: 100%; background: var(--accent); color: var(--accent-ink); border: none; padding: 10px; border-radius: 6px; font-weight: 700; font-size: 13px; cursor: pointer; }
+  .add-cart-btn.added { background: var(--ink); }
+  .disclaimer-tag { font-family: "JetBrains Mono", monospace; font-size: 9.5px; color: var(--text-muted); margin-top: 8px; }
+
+  .replay-btn {
+    font-family: "JetBrains Mono", monospace; font-size: 11.5px; font-weight: 600;
+    background: none; border: 1.5px solid var(--border); color: var(--text-muted);
+    padding: 6px 12px; border-radius: 100px; cursor: pointer; margin-top: 14px;
+  }
+  .replay-btn:hover { border-color: var(--ink); color: var(--text); }
+
+  footer {
+    padding: 24px 0 44px;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--border);
+  }
+  footer .proj { font-family: "JetBrains Mono", monospace; }
+</style>
+
+<div class="topbar" id="top">
+  <span class="dot"></span>
+  <span>Предложение по росту продаж</span>
+  <span class="domain">i-shop.ru</span>
+</div>
+
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Аудит и рост продаж · i-shop.ru</p>
+    <h1>Два направления, один разговор</h1>
+    <p class="lede">Выберите, с чего начать — оба ведут к одной и той же технологии внутри.</p>
+  </div>
+
+  <div class="forks">
+    <div class="fork">
+      <div class="fork-tag">Направление 1</div>
+      <h2>Улучшение конверсии сайта в продажи</h2>
+      <p class="desc">Из 51 300 визитов с просмотром товара до корзины доходят лишь ~11%. Внутри — AI-консьерж, который перехватывает посетителя в момент колебания и доводит до покупки прямо в чате.</p>
+      <div class="stat-row">
+        <div class="mini-stat"><b>89%</b><span>уходят без корзины</span></div>
+        <div class="mini-stat"><b>+41%</b><span>потенциал к заказам</span></div>
+      </div>
+      <a class="btn-link-blue" href="https://dendroid-raise.github.io/ishop-concierge-demo/" target="_blank" rel="noopener">
+        Смотреть демо консьержа ↗
+      </a>
+    </div>
+
+    <div class="fork">
+      <div class="fork-tag">Направление 2</div>
+      <h2>Работа с клиентской базой</h2>
+      <p class="desc">У вас уже несколько тысяч клиентов, которые покупали раньше. Сейчас с ними никто не работает — предлагаем автообзвон/рассылку с передачей разговора тому же AI-консьержу.</p>
+      <div class="stat-row">
+        <div class="mini-stat"><b>3</b><span>готовых повода вернуть</span></div>
+        <div class="mini-stat"><b>0₽</b><span>стоит база — уже есть</span></div>
+      </div>
+      <a class="btn-anchor" href="#base">
+        Смотреть раздел ↓
+      </a>
+    </div>
+  </div>
+</div>
+
+<section id="base">
+  <div class="wrap">
+    <a class="back-to-top" href="#top">↑ к выбору направления</a>
+    <p class="section-tag">Направление 2 · отдельный канал, не триггер на сайте</p>
+    <h2 class="block-title">У вас уже есть несколько тысяч клиентов. Никто им сейчас не звонит.</h2>
+    <p class="section-sub">
+      В отличие от сценариев на сайте (они реагируют на поведение прямо сейчас), здесь мы <b>сами инициируем контакт</b>
+      с теми, кто уже покупал — автообзвон или рассылка, а дальше разговор ведёт тот же AI-консьерж, что и на сайте.
+    </p>
+
+    <div class="flow">
+      <div class="flow-step">
+        <span class="n">01</span>
+        <h4>Сегментация базы</h4>
+        <p>По дате и составу прошлых покупок — кому актуален апгрейд, кому подарок, кому спецпредложение.</p>
+      </div>
+      <div class="flow-step">
+        <span class="n">02</span>
+        <h4>Исходящий триггер</h4>
+        <p>Автообзвон (голосовой бот) или рассылка WhatsApp/SMS — короткий, конкретный повод написать.</p>
+      </div>
+      <div class="flow-step">
+        <span class="n">03</span>
+        <h4>Консьерж подхватывает</h4>
+        <p>Клиент отвечает — и дальше с ним говорит тот же AI, что и на сайте: вопросы → рекомендация → заказ.</p>
+      </div>
+    </div>
+
+    <p class="section-tag">Кого и чем зацепить</p>
+    <div class="segments">
+      <div class="segment">
+        <div>
+          <div class="who">Апгрейд телефона</div>
+          <div class="cond">купил iPhone ≥ 18–24 мес. назад</div>
+        </div>
+        <div class="angle">«Пора обновиться» + бесплатная оценка трейд-ина текущего телефона.</div>
+      </div>
+      <div class="segment">
+        <div>
+          <div class="who">Подарок близкому</div>
+          <div class="cond">вся база, привязка к сезону/празднику</div>
+        </div>
+        <div class="angle">Не «купите ещё раз себе», а «кому-то точно понравится» — Новый год, 8 марта, дни рождения.</div>
+      </div>
+      <div class="segment">
+        <div>
+          <div class="who">Спецпредложение для своих</div>
+          <div class="cond">покупал 1+ раз, давно не возвращался</div>
+        </div>
+        <div class="angle">Условие доступно только тем, кто уже покупал — ощущение статуса, а не массовая скидка.</div>
+      </div>
+    </div>
+
+    <p class="section-tag">Как это выглядит</p>
+    <p class="section-sub">Слева — что клиент получает первым (WhatsApp/SMS), справа — как в разговор включается консьерж, когда клиент отвечает.</p>
+
+    <div class="angle-picker">
+      <button class="angle-btn active" data-angle="upgrade">Апгрейд телефона</button>
+      <button class="angle-btn" data-angle="gift">Подарок близкому</button>
+      <button class="angle-btn" data-angle="loyalty">Спецпредложение для своих</button>
+    </div>
+
+    <div class="sim">
+      <div class="sim-col">
+        <span class="sim-label">Исходящее сообщение</span>
+        <div class="phone">
+          <div class="phone-head"><div class="av">iS</div><span>iShop</span></div>
+          <div class="phone-body" id="waBody"></div>
+        </div>
+      </div>
+      <div class="sim-col">
+        <span class="sim-label">Консьерж подхватывает</span>
+        <div class="chatframe">
+          <div class="chat-head">
+            <div class="av">iS</div>
+            <div><div class="who">Консьерж iShop</div><div class="status">на связи</div></div>
+          </div>
+          <div class="chat-body" id="chatBody">
+            <div class="chat-empty" id="chatEmpty">Нажмите на кнопку в сообщении слева →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="replay-btn" id="replayBtn">⟲ Повторить с начала</button>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; width:100%;">
+    <span class="proj">i-shop.ru · предложение по росту продаж</span>
+    <span>Направление 1 — <a href="https://dendroid-raise.github.io/ishop-concierge-demo/" target="_blank" rel="noopener" style="color:var(--link-blue)">живое демо консьержа</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  const waBody = document.getElementById('waBody');
+  const chatBody = document.getElementById('chatBody');
+  const chatEmpty = document.getElementById('chatEmpty');
+  const replayBtn = document.getElementById('replayBtn');
+
+  let currentAngle = 'upgrade';
+  let cancelled = false;
+
+  function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+  function scrollDown(el) { el.scrollTop = el.scrollHeight; }
+
+  async function botTyping() {
+    const el = document.createElement('div');
+    el.className = 'typing';
+    el.innerHTML = '<span></span><span></span><span></span>';
+    chatBody.appendChild(el);
+    scrollDown(chatBody);
+    await wait(650 + Math.random() * 300);
+    if (cancelled) return;
+    el.remove();
+  }
+  async function botSay(text) {
+    await botTyping();
+    if (cancelled) return;
+    const el = document.createElement('div');
+    el.className = 'msg bot';
+    el.textContent = text;
+    chatBody.appendChild(el);
+    scrollDown(chatBody);
+    await wait(200);
+  }
+  function userSay(text) {
+    const el = document.createElement('div');
+    el.className = 'msg user';
+    el.textContent = text;
+    chatBody.appendChild(el);
+    scrollDown(chatBody);
+  }
+  function quickReplies(options) {
+    return new Promise(resolve => {
+      const wrap = document.createElement('div');
+      wrap.className = 'quick-replies';
+      options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'qr-btn';
+        btn.textContent = opt;
+        btn.onclick = () => {
+          if (cancelled) return;
+          [...wrap.querySelectorAll('button')].forEach(b => b.disabled = true);
+          userSay(opt);
+          resolve(opt);
+        };
+        wrap.appendChild(btn);
+      });
+      chatBody.appendChild(wrap);
+      scrollDown(chatBody);
+    });
+  }
+  function recCard({ title, why, price, oldPrice, disclaimer }) {
+    const el = document.createElement('div');
+    el.className = 'rec-card';
+    el.innerHTML = `
+      <div class="rec-title">${title}</div>
+      <div class="rec-why">${why}</div>
+      <div class="rec-price">${price.toLocaleString('ru-RU')} ₽${oldPrice ? `<span class="old">${oldPrice.toLocaleString('ru-RU')} ₽</span>` : ''}</div>
+      <button class="add-cart-btn">Оформить</button>
+      ${disclaimer ? `<div class="disclaimer-tag">${disclaimer}</div>` : ''}
+    `;
+    chatBody.appendChild(el);
+    scrollDown(chatBody);
+    const btn = el.querySelector('.add-cart-btn');
+    btn.onclick = () => { btn.textContent = '✓ Оформлено'; btn.classList.add('added'); btn.disabled = true; };
+  }
+
+  const angles = {
+    upgrade: {
+      waLines: [
+        'Привет! Прошло около 2 лет с вашей покупки iPhone у нас 👋',
+        'Самое время присмотреться к новой модели — оценим ваш телефон для трейд-ина бесплатно?',
+      ],
+      cta: 'Оценить телефон',
+      run: async () => {
+        await botSay('Здравствуйте! Подскажите, какая модель сейчас интересна — снова Pro-линейка, или посмотреть что-то попроще?');
+        if (cancelled) return;
+        await quickReplies(['Pro-линейка', 'Базовая модель', 'Пока присматриваюсь']);
+        if (cancelled) return;
+        await botSay('Отлично, вот вариант с учётом трейд-ина вашего текущего телефона:');
+        if (cancelled) return;
+        await botTyping();
+        if (cancelled) return;
+        recCard({
+          title: 'iPhone 17 Pro, 256 Гб',
+          why: 'С учётом трейд-ина вашего текущего iPhone — доплата ниже полной цены.',
+          price: 102780,
+          disclaimer: 'Точная сумма трейд-ина — после оценки состояния устройства',
+        });
+      },
+    },
+    gift: {
+      waLines: [
+        'Скоро праздники 🎁',
+        'Если ищете, что подарить близким — подскажем за 2 минуты, без похода в магазин.',
+      ],
+      cta: 'Подобрать подарок',
+      run: async () => {
+        await botSay('Кому подарок и какой бюджет примерно?');
+        if (cancelled) return;
+        await quickReplies(['Второй половине', 'Родителям', 'Друзьям']);
+        if (cancelled) return;
+        await botSay('Хороший, универсальный вариант:');
+        if (cancelled) return;
+        await botTyping();
+        if (cancelled) return;
+        recCard({
+          title: 'AirPods Pro 3',
+          why: 'Подходит почти всем, всегда актуально, не нужно угадывать размер/цвет.',
+          price: 20480,
+        });
+      },
+    },
+    loyalty: {
+      waLines: [
+        'Вы уже наш клиент 🙌',
+        'Специальная цена на iPhone 18 Pro Max — только для тех, кто уже покупал у нас.',
+      ],
+      cta: 'Посмотреть предложение',
+      run: async () => {
+        await botSay('Рады снова видеть! Интересна конкретная модель, или подсказать, что сейчас в топе?');
+        if (cancelled) return;
+        await quickReplies(['Что в топе', 'iPhone 18 Pro Max']);
+        if (cancelled) return;
+        await botSay('Для постоянных клиентов — вот актуальное предложение:');
+        if (cancelled) return;
+        await botTyping();
+        if (cancelled) return;
+        recCard({
+          title: 'iPhone 18 Pro Max, 2 Тб, чёрный',
+          why: 'Топ линейки, уже со скидкой -72 000 ₽ от полной цены.',
+          price: 319900, oldPrice: 391900,
+        });
+      },
+    },
+  };
+
+  function renderWaMessage() {
+    waBody.innerHTML = '';
+    let delay = 0;
+    angles[currentAngle].waLines.forEach((line) => {
+      const el = document.createElement('div');
+      el.className = 'wa-msg';
+      el.textContent = line;
+      el.style.animationDelay = delay + 's';
+      waBody.appendChild(el);
+      delay += 0.35;
+    });
+    const btn = document.createElement('button');
+    btn.className = 'wa-cta';
+    btn.textContent = angles[currentAngle].cta;
+    btn.style.animationDelay = delay + 's';
+    btn.onclick = startChat;
+    waBody.appendChild(btn);
+  }
+
+  async function startChat() {
+    cancelled = true;
+    await wait(10);
+    cancelled = false;
+    chatBody.innerHTML = '';
+    await wait(300);
+    await angles[currentAngle].run();
+  }
+
+  function resetAll() {
+    cancelled = true;
+    chatBody.innerHTML = '';
+    chatBody.appendChild(chatEmpty);
+    renderWaMessage();
+  }
+
+  document.querySelectorAll('.angle-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentAngle = btn.dataset.angle;
+      document.querySelectorAll('.angle-btn').forEach(b => b.classList.toggle('active', b === btn));
+      resetAll();
+    });
+  });
+  replayBtn.addEventListener('click', resetAll);
+
+  renderWaMessage();
+})();
+</script>

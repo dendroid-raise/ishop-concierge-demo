@@ -483,6 +483,75 @@
   .add-cart-btn:hover { filter: brightness(1.06); }
   .add-cart-btn.added { background: var(--ink); }
 
+  .lead-card {
+    background: var(--surface);
+    border: 1.5px dashed var(--border);
+    border-radius: 10px;
+    padding: 13px 14px;
+    align-self: flex-start;
+    max-width: 92%;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(6px);
+    animation: rise 0.3s ease forwards;
+  }
+  .lead-card .lead-label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .lead-card input[type="tel"] {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 13px;
+    font-family: "Open Sans", sans-serif;
+    margin-bottom: 8px;
+    background: var(--bg);
+    color: var(--text);
+    transition: border-color 0.12s ease;
+  }
+  .lead-card input[type="tel"]:focus { outline: none; border-color: var(--accent); }
+  .lead-card label.consent {
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+    font-size: 10.5px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    line-height: 1.4;
+    cursor: pointer;
+  }
+  .lead-card label.consent input { margin-top: 2px; accent-color: var(--accent); flex-shrink: 0; }
+  .lead-card .lead-actions { display: flex; gap: 8px; align-items: center; }
+  .lead-card .lead-submit {
+    flex: 1;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border: none;
+    padding: 9px;
+    border-radius: 6px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 700;
+    font-size: 12.5px;
+    cursor: pointer;
+  }
+  .lead-card .lead-submit:hover { filter: brightness(1.06); }
+  .lead-card .lead-skip {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 9px 4px;
+  }
+
   .chat-input-row {
     padding: 10px 12px;
     border-top: 1px solid var(--border);
@@ -520,7 +589,7 @@
 <div class="demo-shell">
   <div class="demo-head">
     <h1>Проектирование интерфейса консьержа</h1>
-    <p>Четыре триггер-сценария и то, как виджет ведёт себя в каждом — от тихого приглашения до карточки с рекомендацией. Переключай сценарии и вид (десктоп/мобайл) ниже.</p>
+    <p>Четыре триггер-сценария и то, как виджет ведёт себя в каждом — от тихого приглашения до карточки с рекомендацией и мягкого сбора контакта на случай, если не купят сразу. Переключай сценарии и вид (десктоп/мобайл) ниже.</p>
   </div>
 
   <div class="controls">
@@ -678,6 +747,51 @@
     };
   }
 
+  // lead capture: shown after value is delivered, never blocking, always skippable
+  async function offerLeadCapture(introText) {
+    await botSay(introText);
+    if (cancelled) return false;
+    return new Promise((resolve) => {
+      const el = document.createElement('div');
+      el.className = 'lead-card';
+      el.innerHTML = `
+        <div class="lead-label">Напоминание, если не купите сегодня</div>
+        <input type="tel" placeholder="+7 (___) ___-__-__" />
+        <label class="consent">
+          <input type="checkbox">
+          <span>Согласен на обработку персональных данных и получение сообщений от iShop</span>
+        </label>
+        <div class="lead-actions">
+          <button class="lead-submit">Прислать</button>
+          <button class="lead-skip">Не сейчас</button>
+        </div>
+      `;
+      chatBody.appendChild(el);
+      scrollDown();
+      const phone = el.querySelector('input[type="tel"]');
+      const consent = el.querySelector('input[type="checkbox"]');
+      const submitBtn = el.querySelector('.lead-submit');
+      const skipBtn = el.querySelector('.lead-skip');
+
+      submitBtn.onclick = async () => {
+        if (cancelled) return;
+        if (!phone.value.trim() || !consent.checked) {
+          phone.style.borderColor = 'var(--accent)';
+          return;
+        }
+        el.remove();
+        userSay(phone.value.trim());
+        await botSay('Готово — если не успеете сегодня, напомню именно об этой подборке 🙂');
+        resolve(true);
+      };
+      skipBtn.onclick = () => {
+        if (cancelled) return;
+        el.remove();
+        resolve(false);
+      };
+    });
+  }
+
   // ---- scenario definitions ----
   const scenarios = {
     paralysis: {
@@ -702,6 +816,8 @@
           why: 'У Pro Max самый долгий заряд в линейке — до 33 часов видео. При вашем бюджете это top-вариант с запасом автономности.',
           price: 109000, oldPrice: 133500,
         });
+        if (cancelled) return;
+        await offerLeadCapture('Если не успеете оформить сегодня — оставьте номер, пришлю напоминание с этой моделью.');
       },
     },
     exit: {
@@ -723,8 +839,12 @@
             why: 'Хватит с запасом для учёбы и работы с текстами/таблицами.',
             price: 64900,
           });
+          if (cancelled) return;
+          await offerLeadCapture('Если не успеете сегодня — пришлю напоминание с этим вариантом.');
         } else {
-          await botSay('Для монтажа и тяжёлых задач лучше смотреть модели помощнее — не хочу гадать с конфигурацией, спишу вас с консультантом магазина, он подберёт точно под вашу нагрузку.');
+          await botSay('Для монтажа и тяжёлых задач лучше смотреть модели помощнее — не хочу гадать с конфигурацией, свяжу вас с консультантом магазина, он подберёт точно под вашу нагрузку.');
+          if (cancelled) return;
+          await offerLeadCapture('Оставите номер? Консультант посчитает конфигурацию и сам свяжется с вами.');
         }
       },
     },
@@ -751,6 +871,8 @@
           why: 'Более личный подарок — трекинг активности, всегда на виду.',
           price: 21100,
         });
+        if (cancelled) return;
+        await offerLeadCapture('Оставить номер, чтобы прислать эти варианты и напомнить, если не успеете выбрать?');
       },
     },
     price: {
@@ -771,6 +893,8 @@
             price: 319900, oldPrice: 391900,
             installment: '≈ 26 658 ₽/мес на 12 месяцев, без переплаты',
           });
+          if (cancelled) return;
+          await offerLeadCapture('Хотите, пришлю этот расчёт на WhatsApp, чтобы не потерять?');
         } else {
           await botSay('Хорошо, дайте знать, если появятся вопросы 🙂');
         }
